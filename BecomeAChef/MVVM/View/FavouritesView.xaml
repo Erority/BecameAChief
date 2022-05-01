@@ -6,16 +6,16 @@
              xmlns:local="clr-namespace:BecomeAChef.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Margin="25 0 83 0">
         <ListView  Background="Transparent" BorderThickness="0" ItemsSource="{Binding UserFavoritesReceips}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="1"
-            BorderBrush="#9586A8"
-            Background="White"
-            CornerRadius="8"
-            Width="177"
-            Height="211">
+                            BorderBrush="#9586A8"
+                            Background="White"
+                            CornerRadius="8"
+                            Width="177"
+                            Height="211">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -23,21 +23,26 @@
                             </Grid.RowDefinitions>
 
                             <Border BorderThickness="0"
-            CornerRadius=" 8 8 0 0">
+                                    CornerRadius=" 8 8 0 0">
                                 <Border.Background>
                                     <ImageBrush ImageSource="{Binding ImageToUI}" Stretch="UniformToFill"/>
                                 </Border.Background>
                             </Border>
                             <TextBlock
-                Grid.Row="1"
-                FontSize="14"
-                FontWeight="Bold"
-                Margin="15 10 0 0"
-                Text="Брауни"/>
+                                 Grid.Row="1"
+                                 FontSize="14"
+                                 FontWeight="Bold"
+                                 Margin="15 10 0 0"
+                                 Text="{Binding Title}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Margin="0 0 13 0"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
         </ListView>
     </Grid>
 </UserControl>

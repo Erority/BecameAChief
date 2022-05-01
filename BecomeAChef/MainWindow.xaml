@@ -7,11 +7,11 @@
         xmlns:local="clr-namespace:BecomeAChef"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
-        MinHeight="840"
+        MinHeight="700"
         MinWidth="1065"
         MaxHeight="900"
         MaxWidth="1100"
-        Title="MainWindow" Height="840" Width="1065">
+        Title="MainWindow" Height="700" Width="1065">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>

@@ -1,4 +1,7 @@
 ﻿using BecomeAChef.Core;
+using BecomeAChef.Utils;
+using BecomeAChef.EF;
+using System.Linq;
 
 namespace BecomeAChef.MVVM.ViewModel
 {
@@ -24,9 +27,16 @@ namespace BecomeAChef.MVVM.ViewModel
 
         public MainViewModel()
         {
+
+            using (RecipeBookDBEntities db = new RecipeBookDBEntities())
+            {
+                UserDataSaver.UserObject = (object)db.User.Where(u => u.ID == 2).FirstOrDefault();
+            }
+
             StartScreenVM = new StartScreenViewModel();
             OptionMenuVM = new OptionMenuViewModel();   
             CurrentView = OptionMenuVM;
+
         }
     }
 }

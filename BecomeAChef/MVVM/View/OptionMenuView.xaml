@@ -39,7 +39,14 @@
                 />
 
 
-                <Grid Grid.Row="1" Grid.Column="1">
+                <Button Content="Добавить рецепт"
+                        Grid.Row="0"
+                        Margin="10 13 10 4"
+                        Grid.Column="1"
+                        Style="{StaticResource ButtonMainTheme}"
+                    />
+
+                <Grid Grid.Row="1" Grid.Column="1" Margin="10 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

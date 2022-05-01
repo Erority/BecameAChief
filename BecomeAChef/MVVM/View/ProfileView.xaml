@@ -20,13 +20,14 @@
 
         <StackPanel>
             <Image
-                Source="pack://application:,,,/Theme/Images/Logo.png"
+                Source="{Binding UserImage}"
                 Width="110"
                 Height="110"/>
             <Button
                 Background="Transparent"
                 BorderThickness="0"
                 Margin="0 4 0 0"
+                Command="{Binding ChangeUserImageCommand}"
                 Width="34"
                 Height="34">
                 <Button.Content>
@@ -101,35 +102,45 @@
                     BorderThickness="0"
                     BorderBrush="Transparent"
                     Grid.Row="1">
-                <ListView Grid.Row="1" Background="Transparent" BorderThickness="0">
+                <ListView Grid.Row="1" Background="Transparent" BorderThickness="0" 
+                          Margin="10"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                          ItemsSource="{Binding UserRecipes}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                             <Border Background="White"
-                                    BorderThickness="0"
-                                    CornerRadius="8"
-                                     BorderBrush="Transparent"
-                                     >
-                             <Grid>
-                                     <Grid.RowDefinitions>
-                                         <RowDefinition Height="*"/>
-                                         <RowDefinition Height="150"/>
+                            <Border BorderThickness="1"
+                                BorderBrush="#9586A8"
+                                Background="White"
+                                CornerRadius="8"
+                                Width="177"
+                                    Height="211">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="65"/>
                                     </Grid.RowDefinitions>
 
-                                 <Image 
-                                     Stretch="UniformToFill"
-                                     Source="pack://application:,,,/Theme/Images/Take a photo icon.png"/>
-
-                                 <TextBlock
-                                    FontSize="14"
-                                    Foreground="#2D0C57"
-                                    Margin="16 10 0 0"
-                                    VerticalAlignment="Top"
-                                    HorizontalAlignment="Left"
-                                    Grid.Row="1" />
-                            </Grid>
-                        
-                        </Border>
-                    </DataTemplate>
+                                    <Border BorderThickness="0"
+                                            CornerRadius=" 8 8 0 0">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding ImageToUI}" Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        FontSize="14"
+                                        FontWeight="Bold"
+                                        Margin="15 10 0 0"
+                                        Text="{Binding Title}"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             </Border>

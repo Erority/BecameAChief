@@ -64,6 +64,12 @@ namespace BecomeAChef.MVVM.ViewModel
             FavouritesVM = new FavouritesViewModel();
             GridVM = new GridViewModel();
 
+            InitCommands();
+           
+        }
+
+        private void InitCommands()
+        {
             ProfileVMCommand = new RelayCommand(o =>
             {
                 CurrentView = ProfileVM;
@@ -81,8 +87,6 @@ namespace BecomeAChef.MVVM.ViewModel
                 CurrentView = GridVM;
                 CurrentViewName = "Кулинарная книга";
             });
-
-
         }
     }
 }
