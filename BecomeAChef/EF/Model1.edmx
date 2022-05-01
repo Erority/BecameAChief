@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RecipeBookDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contents" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CookingTimeMinutes" Type="smallint" Nullable="false" />
+          <Property Name="Portions" Type="tinyint" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="PublishedTimestamp" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfilePicture" Type="varbinary(max)" />
+          <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserFavoriteRecipe">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RecipeID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RecipeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Recipe_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFavoriteRecipe_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="UserFavoriteRecipe" Type="Self.UserFavoriteRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserFavoriteRecipe">
+              <PropertyRef Name="RecipeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserFavoriteRecipe_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserFavoriteRecipe" Type="Self.UserFavoriteRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserFavoriteRecipe">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecipeBookDBModelStoreContainer">
+          <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserFavoriteRecipe" EntityType="Self.UserFavoriteRecipe" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Recipe_User" Association="Self.FK_Recipe_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFavoriteRecipe_Recipe" Association="Self.FK_UserFavoriteRecipe_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="UserFavoriteRecipe" EntitySet="UserFavoriteRecipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserFavoriteRecipe_User" Association="Self.FK_UserFavoriteRecipe_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserFavoriteRecipe" EntitySet="UserFavoriteRecipe" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RecipeBookDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="RecipeBookDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Recipe" EntityType="RecipeBookDBModel.Recipe" />
+          <EntitySet Name="User" EntityType="RecipeBookDBModel.User" />
+          <AssociationSet Name="FK_Recipe_User" Association="RecipeBookDBModel.FK_Recipe_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="UserFavoriteRecipe" Association="RecipeBookDBModel.UserFavoriteRecipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CookingTimeMinutes" Type="Int16" Nullable="false" />
+          <Property Name="Portions" Type="Byte" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PublishedTimestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="RecipeBookDBModel.FK_Recipe_User" FromRole="Recipe" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="RecipeBookDBModel.UserFavoriteRecipe" FromRole="Recipe" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nickname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProfilePicture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Recipe" Relationship="RecipeBookDBModel.FK_Recipe_User" FromRole="User" ToRole="Recipe" />
+          <NavigationProperty Name="Recipe1" Relationship="RecipeBookDBModel.UserFavoriteRecipe" FromRole="User" ToRole="Recipe" />
+        </EntityType>
+        <Association Name="FK_Recipe_User">
+          <End Type="RecipeBookDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="RecipeBookDBModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserFavoriteRecipe">
+          <End Type="RecipeBookDBModel.Recipe" Role="Recipe" Multiplicity="*" />
+          <End Type="RecipeBookDBModel.User" Role="User" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RecipeBookDBModelStoreContainer" CdmEntityContainer="RecipeBookDBEntities">
+          <EntitySetMapping Name="Recipe">
+            <EntityTypeMapping TypeName="RecipeBookDBModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipe">
+                <ScalarProperty Name="PublishedTimestamp" ColumnName="PublishedTimestamp" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Portions" ColumnName="Portions" />
+                <ScalarProperty Name="CookingTimeMinutes" ColumnName="CookingTimeMinutes" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="RecipeBookDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserFavoriteRecipe" TypeName="RecipeBookDBModel.UserFavoriteRecipe" StoreEntitySet="UserFavoriteRecipe">
+            <EndProperty Name="User">
+              <ScalarProperty Name="ID" ColumnName="UserID" />
+            </EndProperty>
+            <EndProperty Name="Recipe">
+              <ScalarProperty Name="ID" ColumnName="RecipeID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

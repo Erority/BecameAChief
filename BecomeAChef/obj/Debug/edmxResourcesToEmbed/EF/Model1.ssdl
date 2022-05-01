@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecipeBookDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Contents" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="CookingTimeMinutes" Type="smallint" Nullable="false" />
+    <Property Name="Portions" Type="tinyint" Nullable="false" />
+    <Property Name="Image" Type="varbinary(max)" />
+    <Property Name="PublishedTimestamp" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nickname" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProfilePicture" Type="varbinary(max)" />
+    <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserFavoriteRecipe">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="RecipeID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="RecipeID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Recipe_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserFavoriteRecipe_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="UserFavoriteRecipe" Type="Self.UserFavoriteRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserFavoriteRecipe">
+        <PropertyRef Name="RecipeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserFavoriteRecipe_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserFavoriteRecipe" Type="Self.UserFavoriteRecipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserFavoriteRecipe">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RecipeBookDBModelStoreContainer">
+    <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserFavoriteRecipe" EntityType="Self.UserFavoriteRecipe" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Recipe_User" Association="Self.FK_Recipe_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserFavoriteRecipe_Recipe" Association="Self.FK_UserFavoriteRecipe_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="UserFavoriteRecipe" EntitySet="UserFavoriteRecipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserFavoriteRecipe_User" Association="Self.FK_UserFavoriteRecipe_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserFavoriteRecipe" EntitySet="UserFavoriteRecipe" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
