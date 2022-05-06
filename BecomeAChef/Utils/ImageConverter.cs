@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,6 +43,19 @@ namespace BecomeAChef.Utils
             encoder.Frames.Add(BitmapFrame.Create(imageC));
             encoder.Save(memStream);
             return memStream.ToArray();
+        }
+
+        public BitmapImage GetImageFromFileDialog()
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            BitmapImage bitmap = new BitmapImage();
+
+            if (openFile.ShowDialog() == true)
+            {
+                bitmap = new BitmapImage(new Uri(openFile.FileName));
+            }
+
+            return bitmap;
         }
     }
 }

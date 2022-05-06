@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Denis\BecameAChief\BecomeAChef\obj\Debug\
+C:\Users\progr\source\repos\BecameAChief\BecomeAChef\obj\Debug\
 BecomeAChef
 none
 false
 DEBUG;TRACE
-C:\Denis\BecameAChief\BecomeAChef\App.xaml
-111193770941
-2-1080765
-28-973734079
-18-1003615639
-MainWindow.xaml;MVVM\View\CookBookView.xaml;MVVM\View\FavouritesView.xaml;MVVM\View\GridView.xaml;MVVM\View\OptionMenuView.xaml;MVVM\View\ProfileView.xaml;MVVM\View\StartScreenView.xaml;MVVM\View\Test.xaml;Theme\ButtonMainTheme.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxMainTheme.xaml;
+C:\Users\progr\source\repos\BecameAChief\BecomeAChef\App.xaml
+15964201237
+3-874400999
+38-546277634
+18514780171
+MainWindow.xaml;MVVM\View\AddReceipeView.xaml;MVVM\View\AuthorizationView.xaml;MVVM\View\CookBookView.xaml;MVVM\View\FavouritesView.xaml;MVVM\View\GridView.xaml;MVVM\View\OptionMenuView.xaml;MVVM\View\ProfileView.xaml;MVVM\View\RecipeView.xaml;MVVM\View\RegistrationView.xaml;MVVM\View\StartScreenView.xaml;MVVM\View\Test.xaml;Theme\ButtonMainTheme.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxMainTheme.xaml;
 
 True
 

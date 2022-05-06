@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="25 0 83 0">
-        <ListView  Background="Transparent" BorderThickness="0" ItemsSource="{Binding UserRecipes}">
+        <ListView  Background="Transparent" BorderThickness="0" ItemsSource="{Binding UserRecipes}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="1"
@@ -40,7 +40,7 @@
             </ListView.ItemTemplate>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Margin="0 0 13 0"/>
+                    <WrapPanel Margin="0 0 13 0" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>

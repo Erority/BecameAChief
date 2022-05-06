@@ -7,12 +7,11 @@ namespace BecomeAChef.MVVM.ViewModel
 {
     class MainViewModel: ObservableObject
     {
-        StartScreenViewModel StartScreenVM;
-        OptionMenuViewModel OptionMenuVM;
-
+        private StartScreenViewModel StartScreenVM;
+        private OptionMenuViewModel OptionMenuVM;
+        private RecipeViewModel RecipeVM;
 
         private object currentView;
-
         public object CurrentView 
         { 
             get { return currentView; } 
@@ -23,20 +22,34 @@ namespace BecomeAChef.MVVM.ViewModel
             } 
         }
 
+        private OptionMenuViewModel LastView;
 
+        private Recipe recipe;
+        public Recipe Recipe
+        {
+            get { return recipe; }
+            set 
+            {
+                recipe = value;
+                RecipeVM = new RecipeViewModel(recipe);
+                LastView = (OptionMenuViewModel)CurrentView;
+                CurrentView = RecipeVM;
+            }
+        }
 
         public MainViewModel()
         {
-
-            using (RecipeBookDBEntities db = new RecipeBookDBEntities())
-            {
-                UserDataSaver.UserObject = (object)db.User.Where(u => u.ID == 2).FirstOrDefault();
-            }
-
             StartScreenVM = new StartScreenViewModel();
-            OptionMenuVM = new OptionMenuViewModel();   
-            CurrentView = OptionMenuVM;
+            OptionMenuVM = new OptionMenuViewModel();
 
+            Coordinator.MainVM = this;
+
+            CurrentView = OptionMenuVM;
+        }
+        
+        public void GoBack()
+        {
+            CurrentView = LastView;
         }
     }
 }

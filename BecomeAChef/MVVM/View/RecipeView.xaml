@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="BecomeAChef.MVVM.View.RecipeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BecomeAChef.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="840" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2.6*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.RowSpan="2">
+            <TextBlock 
+               Text="{Binding CurrentRecipe.Title}"
+                Margin="20 17 0 0"
+                FontSize="34"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                    Foreground="#2D0C57"/>
+
+            <Image Source="{Binding Image}" Margin="10"/>
+        </StackPanel>
+
+        <Button Grid.Column="1"
+                    Content="Назад"
+                    Margin="10 70"
+                    Command="{Binding GoBackCommand}"
+                    Style="{StaticResource ButtonMainTheme}"/>
+
+
+        <Button Grid.Column="2"
+                    Content="Назад"
+                    Margin="10 70"
+                    Command="{Binding AuthCommand}"
+                    Style="{StaticResource ButtonMainTheme}"/>
+
+
+        <Button Grid.Column="3"
+                    Content="Назад"
+                    Margin="10 70"
+                    Command="{Binding AuthCommand}"
+                    Style="{StaticResource ButtonMainTheme}"/>
+
+
+        <Button Grid.Column="4"
+                    Content="Назад"
+                    Margin="10 70"
+                    Command="{Binding AuthCommand}"
+                    Style="{StaticResource ButtonMainTheme}"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <WrapPanel >
+                <Image Source="pack://application:,,,/Theme/Images/user.png" Width="20"/>
+                <TextBlock Foreground="#2D0C57" 
+                           Text="{Binding CurrentRecipe.User.Nickname}"
+                           Margin="4 0 0 0"
+                           FontSize="21"/>
+                <TextBlock Foreground="#9586A8" 
+                           Text="Автор рецепта"
+                           Margin="4 3 0 0"
+                           FontSize="17"/>
+            </WrapPanel>
+
+            <WrapPanel >
+                <Image Source="pack://application:,,,/Theme/Images/item_time.png" Width="20"/>
+                <TextBlock Foreground="#2D0C57" 
+                           Text="{Binding CurrentRecipe.CookingTimeMinutes}"
+                           Margin="4 0 0 0"
+                           FontSize="21"/>
+                <TextBlock Foreground="#9586A8" 
+                           Text="Минут"
+                           Margin="20 3 0 0"
+                           FontSize="17"/>
+            </WrapPanel>
+            <WrapPanel >
+                <Image Source="pack://application:,,,/Theme/Images/item_portion.png" Width="20"/>
+                <TextBlock Foreground="#2D0C57"
+                           Text="{Binding CurrentRecipe.Portions}"
+                           Margin="4 0 0 0"
+                           FontSize="21"/>
+                <TextBlock Foreground="#9586A8" 
+                           Text="Порций"
+                           Margin="32 3 0 0"
+                           FontSize="17"/>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="5">
+            <TextBlock Foreground="#9586A8" 
+                       HorizontalAlignment="Center"
+                           Text="Рецепт"
+                           Margin="32 3 0 0"
+                           FontSize="17"/>
+
+    
+            <TextBlock Foreground="#9586A8" 
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Center"
+                           Text="{Binding CurrentRecipe.Contents}"
+                           Margin="32 3 0 0"
+                           FontSize="17"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -10,7 +10,6 @@ namespace BecomeAChef.MVVM.ViewModel
     {
         public StartScreenViewModel()
         {
-
         }
     }
 }

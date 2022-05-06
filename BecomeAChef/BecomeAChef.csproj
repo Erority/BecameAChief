@@ -64,6 +64,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MVVM\IChangeView.cs" />
+    <Compile Include="MVVM\ViewModel\AddReceipeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\AuthorizationViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\RecipeViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\RegistrationViewModel.cs" />
+    <Compile Include="MVVM\View\AddReceipeView.xaml.cs">
+      <DependentUpon>AddReceipeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\AuthorizationView.xaml.cs">
+      <DependentUpon>AuthorizationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\RecipeView.xaml.cs">
+      <DependentUpon>RecipeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\View\RegistrationView.xaml.cs">
+      <DependentUpon>RegistrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Coordinator.cs" />
     <Compile Include="Utils\ImageConverter.cs" />
     <Compile Include="Utils\UserDataSaver.cs" />
     <Page Include="MainWindow.xaml">
@@ -101,6 +119,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\AddReceipeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\AuthorizationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\CookBookView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +144,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\View\ProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\RecipeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\View\RegistrationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,7 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MVVM\Model\" />
-    <Folder Include="MVVM\ViewModel\OptionMenu\" />
     <Folder Include="Theme\TextBlock\" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +291,12 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Theme\Images\Group 9.png" />
+    <Resource Include="Theme\Images\Take a photo icon variant.png" />
+    <Resource Include="Theme\Images\item_time.png" />
+    <Resource Include="Theme\Images\item_portion.png" />
+    <Content Include="Theme\Images\user.svg" />
+    <Resource Include="Theme\Images\search.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

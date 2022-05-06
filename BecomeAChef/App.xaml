@@ -33,6 +33,23 @@
             <DataTemplate DataType="{x:Type viewModel:GridViewModel}">
                 <view:GridView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AddReceipeViewModel}">
+                <view:AddReceipeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AuthorizationViewModel}">
+                <view:AuthorizationView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:RegistrationViewModel}">
+                <view:RegistrationView/>
+            </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type viewModel:RecipeViewModel}">
+                <view:RecipeView/>
+            </DataTemplate>
         </ResourceDictionary>
          
     </Application.Resources>

@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace BecomeAChef.MVVM.ViewModel
@@ -42,12 +43,79 @@ namespace BecomeAChef.MVVM.ViewModel
             }
         }
 
+        private User userData;
+
+        public User UserData
+        {
+            get { return userData; }
+            set 
+            { 
+                userData = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+      /*  private string userNickName;
+        public string UserNickName
+        {
+            get
+            {
+                return userNickName;
+            }
+            set
+            {
+                userNickName = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private string userEmail;
+        public string UserEmail
+        {
+            get
+            {
+                return userEmail;
+            }
+            set
+            {
+                userEmail = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string userPhone;   
+        public string UserPhone 
+        { 
+            get 
+            {
+                return userPhone;
+            }
+            set 
+            {
+                userPhone = value;
+                OnPropertyChanged();
+            } 
+        }
+*/
+
         public RecipeBookDBEntities db { get; } = new RecipeBookDBEntities();
 
         public ProfileViewModel()
         {
-            UserRecipes = db.Recipe.Where(r => r.UserID == ((User)(UserDataSaver.UserObject)).ID).ToList();
-            UserImage = new ImageConverter().LoadImage(((User)UserDataSaver.UserObject).ProfilePicture);
+            var currentUser = (User)UserDataSaver.UserObject;
+            
+            UserRecipes = db.Recipe.Where(r => r.User.ID == currentUser.ID).ToList();
+            UserImage = new ImageConverter().LoadImage(currentUser.ProfilePicture);
+
+            UserData = currentUser;
+            
+            UserData.Nickname = currentUser.Nickname;
+            UserData.Email = currentUser.Email;
+            UserData.PhoneNumber = currentUser.PhoneNumber;
+
+
             InitCommands();
         }
 
@@ -55,30 +123,51 @@ namespace BecomeAChef.MVVM.ViewModel
         {
             ChangeUserImageCommand = new RelayCommand(o =>
             {
-                UserImage = GetImageFromFileDialog();
+                UserImage = new ImageConverter().GetImageFromFileDialog();
                 UpdateUserImageInDB(new ImageConverter().GetJPGFromImageControl(UserImage));
             });
         }
 
-        private BitmapImage GetImageFromFileDialog()
-        {
-            OpenFileDialog openFile = new OpenFileDialog();
-            BitmapImage bitmap = new BitmapImage();
 
-            if (openFile.ShowDialog() == true)
+        public void ChangeUserData()
+        {
+            var currentUser = ((User)(UserDataSaver.UserObject));
+
+            currentUser.Nickname = UserData.Nickname;
+            currentUser.PhoneNumber = UserData.PhoneNumber;
+            currentUser.Email = UserData.Email;
+
+
+            try
             {
-                bitmap = new BitmapImage(new Uri(openFile.FileName));
+                db.Entry(currentUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
-            return bitmap;
+            MessageBox.Show("Данные изменены успешно");
         }
+
 
         private void UpdateUserImageInDB(byte[] imageCodeArray)
         {
             var currentUser = ((User)(UserDataSaver.UserObject));
             currentUser.ProfilePicture = imageCodeArray;
-            db.Entry(currentUser).State = EntityState.Modified;
-            db.SaveChanges();
+
+            try
+            {
+                db.Entry(currentUser).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            MessageBox.Show("Данные изменены успешно");
         }
     }
 }

@@ -13,6 +13,7 @@
     </UserControl.DataContext>
 
     <Border
+        Margin="0 120 0 0"
         CornerRadius="20 20 0 0"
         Background="#F6F5F5">
         <Grid>
@@ -36,15 +37,103 @@
                 Text="{Binding CurrentViewName}"
                 Margin="20 17 0 0"
                 FontSize="34"
+                    Foreground="#2D0C57"
                 />
 
 
-                <Button Content="Добавить рецепт"
-                        Grid.Row="0"
+                <Button Content="редактировать"
                         Margin="10 13 10 4"
-                        Grid.Column="1"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Command="{Binding EditProfileCommand}"
                         Style="{StaticResource ButtonMainTheme}"
+                        Visibility="{Binding EditButtonVisibility}"/>
+
+                <Border 
+                        Margin="10 13 10 4"
+                        Visibility="{Binding SearchTextBoxVisibility}"
+                        Grid.Row="1"
+                        CornerRadius="27"
+                        BorderThickness="1"
+                        Background="White"
+                        BorderBrush="#2D0C57">
+                    <Grid 
+                        Visibility="{Binding SearchTextBoxVisibility}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 5 0 0"
+                            Source="pack://application:,,,/Theme/Images/search.png" Stretch="Uniform" Width="22" Height="22"/>
+
+                        <Line
+                            X1="10" Y1="0"
+                            X2="10" Y2="40"
+                            Stroke="#D9D0E3"
+                            Margin="0 5 0 5"
+                            StrokeThickness="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"/>
+
+                        <TextBox Grid.Column="1"
+                                 Foreground="#9586A8"
+                                 BorderThickness="0"
+                                 Text="{Binding SearchText}"
+                                 FontWeight="Medium"
+                                 FontSize="17"
+                                 TextAlignment="Left"
+                                 VerticalAlignment="Center"
+                                 />
+                        
+                        <Border BorderBrush="#2D0C57"
+                                BorderThickness="0"
+                                Grid.Column="2"
+                                Margin="4"
+                                Background="#D9D0E3"
+                                CornerRadius="27">
+                            <Button
+                                Command="{Binding SearchCommand}"
+                                Foreground="#2D0C57"
+                                FontSize="17"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Content="найти"/>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Button Content="Редактировать"
+                        Margin="10 13 10 4"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Command="{Binding EditProfileCommand}"
+                        Style="{StaticResource ButtonMainTheme}"
+                        Visibility="{Binding EditButtonVisibility}"
                     />
+
+                <Button Content="Добавить"
+                        Margin="10 13 10 4"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Command="{Binding AddRecipeCommand}"
+                        Style="{StaticResource ButtonMainTheme}"
+                        Visibility="{Binding AddRecipeButtonVisibility}"
+                    />
+
+
+                <RadioButton Style="{StaticResource MenuButtonTheme}" 
+                            Grid.Column="1"
+                            Visibility="{Binding AddReceipeVisibility}"
+                                 Command="{Binding AddReceipeVMCommand}"
+                             IsChecked="{Binding IsCheckedAddReceipe}"
+                             Content="Добавить рецепт"
+                                Margin="10 13 10 4">
+                </RadioButton>
+
 
                 <Grid Grid.Row="1" Grid.Column="1" Margin="10 0">
                     <Grid.ColumnDefinitions>
@@ -52,21 +141,26 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-
                     <RadioButton Style="{StaticResource MenuButtonTheme}" 
                                  Grid.Column="0"
+                                 Visibility="{Binding ProfileButtonVisibility}"
                                  Command="{Binding ProfileVMCommand}"
-                                 Margin="4 4 0 4"/>
+                                 IsChecked="{Binding IsCheckedProfile}"
+                                 Margin="4 4 0 4">
+                    </RadioButton>
 
                     <RadioButton Style="{StaticResource MenuButtonTheme}" 
                                  Grid.Column="1"
+                                 Visibility="{Binding GridButtonVisibility}"
                                  Command="{Binding GridVMCommand}"
+                                 IsChecked="{Binding IsCheckedGrid}"
                                  Margin="4 4 0 4"
                                  x:Name="RadioButtonTrigger"/>
                     <RadioButton Style="{StaticResource MenuButtonTheme}" 
+                                 Visibility="{Binding FavouritesButtonVisibility}"
                                  Grid.Column="2"
                                  Command="{Binding FavouritesVMCommand}"
+                                IsChecked="{Binding IsCheckedFavourites}"
                                  Margin="4 4 0 4"/>
                 </Grid>
 

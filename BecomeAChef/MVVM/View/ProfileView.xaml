@@ -51,8 +51,9 @@
                         Margin="20 0 0 0"
                         Text="Имя"/>
                 <TextBox
+                        Text="{Binding UserData.Nickname}"
                         Style="{StaticResource TextBoxMainTheme}"
-                        Height="45"
+                        Height="45" TextChanged="TextBox_TextChanged"
                         />
             </StackPanel>
 
@@ -63,6 +64,7 @@
                         Margin="20 0 0 0"
                         Text="Номер телефона"/>
                 <TextBox
+                        Text="{Binding UserData.PhoneNumber}"
                         Style="{StaticResource TextBoxMainTheme}"
                         Height="45"
                         />
@@ -75,6 +77,7 @@
                         Margin="20 0 0 0"
                         Text="Почта"/>
                 <TextBox
+                        Text="{Binding UserData.Email}"
                         Style="{StaticResource TextBoxMainTheme}"
                         Height="45"
                         />
