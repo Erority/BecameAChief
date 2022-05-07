@@ -134,6 +134,28 @@
                                 Margin="10 13 10 4">
                 </RadioButton>
 
+                <ToggleButton Style="{StaticResource MenuButtonTheme}" IsChecked="{Binding IsCheckedAddReceipe}"
+                                  Visibility="{Binding AddReceipeVisibility}"
+                                  Command="{Binding AddReceipeVMCommand}"
+                              Margin="4 0 8 4"
+                                  Grid.Column="1">
+
+                    <TextBlock Text="Добавить рецепт" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsCheckedAddReceipe}" Value="false">
+                                        <Setter Property="Foreground" Value="#2D0C57"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding IsCheckedAddReceipe}" Value="true">
+                                        <Setter Property="Foreground" Value="#F6F5F5"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </ToggleButton>
 
                 <Grid Grid.Row="1" Grid.Column="1" Margin="10 0">
                     <Grid.ColumnDefinitions>
@@ -141,27 +163,68 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <RadioButton Style="{StaticResource MenuButtonTheme}" 
-                                 Grid.Column="0"
-                                 Visibility="{Binding ProfileButtonVisibility}"
-                                 Command="{Binding ProfileVMCommand}"
-                                 IsChecked="{Binding IsCheckedProfile}"
-                                 Margin="4 4 0 4">
-                    </RadioButton>
 
-                    <RadioButton Style="{StaticResource MenuButtonTheme}" 
-                                 Grid.Column="1"
-                                 Visibility="{Binding GridButtonVisibility}"
-                                 Command="{Binding GridVMCommand}"
-                                 IsChecked="{Binding IsCheckedGrid}"
-                                 Margin="4 4 0 4"
-                                 x:Name="RadioButtonTrigger"/>
-                    <RadioButton Style="{StaticResource MenuButtonTheme}" 
-                                 Visibility="{Binding FavouritesButtonVisibility}"
-                                 Grid.Column="2"
-                                 Command="{Binding FavouritesVMCommand}"
-                                IsChecked="{Binding IsCheckedFavourites}"
-                                 Margin="4 4 0 4"/>
+                    <ToggleButton Style="{StaticResource MenuButtonTheme}" IsChecked="{Binding IsCheckedProfile}"
+                                  Visibility="{Binding ProfileButtonVisibility}"
+                                  Command="{Binding ProfileVMCommand}"
+                                  Grid.Column="1"
+                                  Margin="4 4 0 4">
+                        <Image Width="24" Height="24"  >
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCheckedProfile}" Value="true">
+                                            <Setter Property="Source" Value="pack://application:,,,/Theme/Images/userInversion.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsCheckedProfile}" Value="false">
+                                            <Setter Property="Source" Value="pack://application:,,,/Theme/Images/user.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </ToggleButton>
+
+                    <ToggleButton Style="{StaticResource MenuButtonTheme}" IsChecked="{Binding IsCheckedGrid}"
+                                  Visibility="{Binding GridButtonVisibility}"
+                                  Command="{Binding GridVMCommand}"
+                                  Margin="4 4 0 4">
+                        <Image Width="24" Height="24"  >
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCheckedGrid}" Value="true">
+                                            <Setter Property="Source" Value="pack://application:,,,/Theme/Images/gridInversion.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsCheckedGrid}" Value="false">
+                                            <Setter Property="Source" Value="pack://application:,,,/Theme/Images/grid.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </ToggleButton>
+
+                    <ToggleButton Style="{StaticResource MenuButtonTheme}" IsChecked="{Binding IsCheckedFavourites}"
+                                  Visibility="{Binding FavouritesButtonVisibility}"
+                                  Command="{Binding FavouritesVMCommand}"
+                                  Grid.Column="2"
+                                  Margin="4 4 0 4">
+                        <Image Width="24" Height="24"  >
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsCheckedFavourites}" Value="true">
+                                            <Setter Property="Source" Value="pack://application:,,,/Theme/Images/heartInversion.png"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsCheckedFavourites}" Value="false">
+                                            <Setter Property="Source" Value="pack://application:,,,/Theme/Images/heart.png"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </ToggleButton>
                 </Grid>
 
             </Grid>

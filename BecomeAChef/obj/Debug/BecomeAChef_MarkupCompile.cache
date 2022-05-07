@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\progr\source\repos\BecameAChief\BecomeAChef\obj\Debug\
+C:\Users\progr\Desktop\BecameAChief\BecomeAChef\obj\Debug\
 BecomeAChef
 none
 false
 DEBUG;TRACE
-C:\Users\progr\source\repos\BecameAChief\BecomeAChef\App.xaml
+C:\Users\progr\Desktop\BecameAChief\BecomeAChef\App.xaml
 15964201237
 3-874400999
 371535810984
-18514780171
+181327027913
 MainWindow.xaml;MVVM\View\AddReceipeView.xaml;MVVM\View\AuthorizationView.xaml;MVVM\View\CookBookView.xaml;MVVM\View\FavouritesView.xaml;MVVM\View\GridView.xaml;MVVM\View\OptionMenuView.xaml;MVVM\View\ProfileView.xaml;MVVM\View\RecipeView.xaml;MVVM\View\RegistrationView.xaml;MVVM\View\StartScreenView.xaml;MVVM\View\Test.xaml;Theme\ButtonMainTheme.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxMainTheme.xaml;
 
 False
