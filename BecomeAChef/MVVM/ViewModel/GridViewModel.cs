@@ -38,11 +38,30 @@ namespace BecomeAChef.MVVM.ViewModel
         }
 
 
+
+        private Visibility textBlockNoContentVisibility;
+
+        public Visibility TextBlockNoContentVisibility
+        {
+            get { return textBlockNoContentVisibility; }
+            set
+            {
+                textBlockNoContentVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
         private RecipeBookDBEntities db = new RecipeBookDBEntities();
 
         public GridViewModel()
         {
             UserRecipes = db.Recipe.ToList();
+
+
+            if (UserRecipes.Count <= 0)
+                TextBlockNoContentVisibility = Visibility.Visible;
+            else
+                TextBlockNoContentVisibility = Visibility.Hidden;
         }
 
 

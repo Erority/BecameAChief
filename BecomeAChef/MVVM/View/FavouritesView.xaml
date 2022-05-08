@@ -7,6 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="25 0 83 0">
+
+        <TextBlock FontSize="25"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Visibility="{Binding TextBlockNoContentVisibility}"
+                   Text="Данных нет"
+                   Foreground="#2D0C57"/>
+
         <ListView  Background="Transparent" BorderThickness="0" ItemsSource="{Binding UserFavoritesReceips}" SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>

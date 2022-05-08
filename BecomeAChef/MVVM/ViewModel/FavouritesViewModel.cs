@@ -36,6 +36,20 @@ namespace BecomeAChef.MVVM.ViewModel
             }
         }
 
+
+        private Visibility textBlockNoContentVisibility;
+
+        public Visibility TextBlockNoContentVisibility
+        {
+            get { return textBlockNoContentVisibility; }
+            set 
+            { 
+                textBlockNoContentVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public FavouritesViewModel()
         {
             using (RecipeBookDBEntities db = new RecipeBookDBEntities()) 
@@ -44,6 +58,10 @@ namespace BecomeAChef.MVVM.ViewModel
 
                 UserFavoritesReceips = user.Recipe1.ToList();
                 
+                if (userFavoritesReceips.Count <=0 ) 
+                    TextBlockNoContentVisibility = Visibility.Visible;
+                else
+                    TextBlockNoContentVisibility = Visibility.Hidden;
             }
         }
 
