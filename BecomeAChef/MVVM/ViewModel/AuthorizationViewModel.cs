@@ -50,7 +50,7 @@ namespace BecomeAChef.MVVM.ViewModel
                 using (RecipeBookDBEntities db = new RecipeBookDBEntities())
                 {
                     var user = db.User.Where(u => (u.PhoneNumber == PhoneOrEmail || u.Email == PhoneOrEmail) && u.Password == Password).FirstOrDefault();
-                    UserDataSaver.UserObject = (object)user;
+                    UserDataSaver.UserID = user.ID;
 
                     if (user != null)
                     {

@@ -29,19 +29,31 @@ namespace BecomeAChef.MVVM.ViewModel
 
         public FavouritesViewModel()
         {
-            UserFavoritesReceips = ((User)UserDataSaver.UserObject).Recipe1.ToList();    
+            using (RecipeBookDBEntities db = new RecipeBookDBEntities()) 
+            {
+                var user = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault();
+
+                UserFavoritesReceips = user.Recipe1.ToList();
+                
+            }
         }
 
         public bool FilterCollection (string searchStr)
         {
             UserFavoritesReceips = UserFavoritesReceips.Where(r => r.Title.ToLower() == searchStr.ToLower()).ToList();
 
-            if (UserFavoritesReceips.Count <= 0)
+            using (RecipeBookDBEntities db = new RecipeBookDBEntities())
             {
-                MessageBox.Show("Рецептов с таким названием нет", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
-                UserFavoritesReceips = db.Recipe.Where(r => r.UserID == ((User)UserDataSaver.UserObject).ID).ToList();
+                var user = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault();
 
-                return false;
+                UserFavoritesReceips = user.Recipe1.ToList();
+                if (UserFavoritesReceips.Count <= 0)
+                {
+                    MessageBox.Show("Рецептов с таким названием нет", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    UserFavoritesReceips = db.Recipe.Where(r => r.UserID == user.ID).ToList();
+
+                    return false;
+                }
             }
 
             return true;

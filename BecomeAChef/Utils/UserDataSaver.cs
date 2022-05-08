@@ -9,12 +9,12 @@ namespace BecomeAChef.Utils
 {
     internal static class UserDataSaver
     {
-        private static object userObject;
+        private static int userID;
 
-        public static object UserObject
+        public static int UserID
         {
-            get { return userObject; }
-            set { userObject = value; }
+            get { return userID; }
+            set { userID = value; }
         }
 
     }

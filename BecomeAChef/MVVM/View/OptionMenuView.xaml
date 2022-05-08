@@ -137,7 +137,7 @@
                 <ToggleButton Style="{StaticResource MenuButtonTheme}" IsChecked="{Binding IsCheckedAddReceipe}"
                                   Visibility="{Binding AddReceipeVisibility}"
                                   Command="{Binding AddReceipeVMCommand}"
-                              Margin="4 0 8 4"
+                              Margin="4 12 8 4"
                                   Grid.Column="1">
 
                     <TextBlock Text="Добавить рецепт" FontSize="15" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -167,7 +167,7 @@
                     <ToggleButton Style="{StaticResource MenuButtonTheme}" IsChecked="{Binding IsCheckedProfile}"
                                   Visibility="{Binding ProfileButtonVisibility}"
                                   Command="{Binding ProfileVMCommand}"
-                                  Grid.Column="1"
+                                  Grid.Column="0"
                                   Margin="4 4 0 4">
                         <Image Width="24" Height="24"  >
                             <Image.Style>
@@ -188,6 +188,7 @@
                     <ToggleButton Style="{StaticResource MenuButtonTheme}" IsChecked="{Binding IsCheckedGrid}"
                                   Visibility="{Binding GridButtonVisibility}"
                                   Command="{Binding GridVMCommand}"
+                                  Grid.Column="1"
                                   Margin="4 4 0 4">
                         <Image Width="24" Height="24"  >
                             <Image.Style>

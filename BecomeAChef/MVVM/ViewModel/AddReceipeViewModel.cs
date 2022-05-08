@@ -103,7 +103,7 @@ namespace BecomeAChef.MVVM.ViewModel
         {
             Recipe recipe = new Recipe()
             {
-                UserID = ((User)UserDataSaver.UserObject).ID,
+                UserID = (UserDataSaver.UserID),
                 Contents = Content,
                 Image = new ImageConverter().GetJPGFromImageControl(Image),
                 Title = this.Title,

@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 using BecomeAChef.EF;
 using BecomeAChef.Utils;
 using BecomeAChef.Core;
+using BecomeAChef.EF;
 using System.Windows.Media.Imaging;
+using System.Data.Entity;
+using System.Windows;
 
 namespace BecomeAChef.MVVM.ViewModel
 {
     class RecipeViewModel: ObservableObject
     {
         public RelayCommand GoBackCommand { get; set; }
+
+        private bool isInit = true;
 
         private Recipe currentRecipe;
         public Recipe CurrentRecipe
@@ -41,6 +46,18 @@ namespace BecomeAChef.MVVM.ViewModel
             set { image = value; OnPropertyChanged(); }
         }
 
+        private bool isCheckedFavourites;
+        public bool IsCheckedFavourites
+        {
+            get { return isCheckedFavourites; }
+            set
+            {
+                ChangeRecipeState(isCheckedFavourites);
+
+                isCheckedFavourites = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RecipeViewModel(Recipe recipe)
         {
@@ -48,6 +65,9 @@ namespace BecomeAChef.MVVM.ViewModel
 
             Image = new ImageConverter().LoadImage(recipe.Image);
             InitCommands();
+
+            CheckedIsRecipeInFavorite();
+            isInit = false;
         }
 
         private void InitCommands()
@@ -56,6 +76,63 @@ namespace BecomeAChef.MVVM.ViewModel
             {
                 Coordinator.MainVM.GoBack();
             });
+        }
+
+        private void CheckedIsRecipeInFavorite()
+        {
+            using (RecipeBookDBEntities db = new RecipeBookDBEntities()) 
+            { 
+                var favoritesRecipes = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault().Recipe1.ToList();
+
+                foreach (var recipe in favoritesRecipes)
+                {
+                    if (recipe.ID == CurrentRecipe.ID)
+                    {
+                        IsCheckedFavourites = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ChangeRecipeState(bool lastState)
+        {
+            if (!isInit)
+            {
+                using (RecipeBookDBEntities db = new RecipeBookDBEntities())
+                {
+                    var currentUser = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault();
+
+                    if (lastState == false)
+                    {
+                        var recipe = db.Recipe.Where(r => r.ID == CurrentRecipe.ID).FirstOrDefault();
+                        
+                        try
+                        {
+                            currentUser.Recipe1.Add(recipe);
+                            db.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        var recipe = db.Recipe.Where(r => r.ID == CurrentRecipe.ID).FirstOrDefault();
+
+                        try
+                        {
+                            currentUser.Recipe1.Remove(recipe);
+                            db.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -56,65 +56,25 @@ namespace BecomeAChef.MVVM.ViewModel
         }
 
 
-      /*  private string userNickName;
-        public string UserNickName
-        {
-            get
-            {
-                return userNickName;
-            }
-            set
-            {
-                userNickName = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-        private string userEmail;
-        public string UserEmail
-        {
-            get
-            {
-                return userEmail;
-            }
-            set
-            {
-                userEmail = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private string userPhone;   
-        public string UserPhone 
-        { 
-            get 
-            {
-                return userPhone;
-            }
-            set 
-            {
-                userPhone = value;
-                OnPropertyChanged();
-            } 
-        }
-*/
-
-        public RecipeBookDBEntities db { get; } = new RecipeBookDBEntities();
-
         public ProfileViewModel()
         {
-            var currentUser = (User)UserDataSaver.UserObject;
-            
-            UserRecipes = db.Recipe.Where(r => r.User.ID == currentUser.ID).ToList();
-            UserImage = new ImageConverter().LoadImage(currentUser.ProfilePicture);
 
-            UserData = currentUser;
-            
-            UserData.Nickname = currentUser.Nickname;
-            UserData.Email = currentUser.Email;
-            UserData.PhoneNumber = currentUser.PhoneNumber;
 
+            using (RecipeBookDBEntities db = new RecipeBookDBEntities())
+            {
+                var currentUser = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault();
+
+
+                UserRecipes = db.Recipe.Where(r => r.User.ID == currentUser.ID).ToList();
+                UserImage = new ImageConverter().LoadImage(currentUser.ProfilePicture);
+
+                UserData = currentUser;
+
+                UserData.Nickname = currentUser.Nickname;
+                UserData.Email = currentUser.Email;
+                UserData.PhoneNumber = currentUser.PhoneNumber;
+
+            }
 
             InitCommands();
         }
@@ -131,21 +91,24 @@ namespace BecomeAChef.MVVM.ViewModel
 
         public void ChangeUserData()
         {
-            var currentUser = ((User)(UserDataSaver.UserObject));
-
-            currentUser.Nickname = UserData.Nickname;
-            currentUser.PhoneNumber = UserData.PhoneNumber;
-            currentUser.Email = UserData.Email;
-
-
-            try
+            using (RecipeBookDBEntities db = new RecipeBookDBEntities())
             {
-                db.Entry(currentUser).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                var currentUser = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault();
+
+                currentUser.Nickname = UserData.Nickname;
+                currentUser.PhoneNumber = UserData.PhoneNumber;
+                currentUser.Email = UserData.Email;
+
+
+                try
+                {
+                    db.Entry(currentUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
             MessageBox.Show("Данные изменены успешно");
@@ -154,17 +117,20 @@ namespace BecomeAChef.MVVM.ViewModel
 
         private void UpdateUserImageInDB(byte[] imageCodeArray)
         {
-            var currentUser = ((User)(UserDataSaver.UserObject));
-            currentUser.ProfilePicture = imageCodeArray;
+            using (RecipeBookDBEntities db = new RecipeBookDBEntities())
+            {
+                var currentUser = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault();
 
-            try
-            {
-                db.Entry(currentUser).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                currentUser.ProfilePicture = imageCodeArray;
+                try
+                {
+                    db.Entry(currentUser).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
             MessageBox.Show("Данные изменены успешно");
