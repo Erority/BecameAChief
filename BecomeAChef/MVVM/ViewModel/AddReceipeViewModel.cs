@@ -86,9 +86,12 @@ namespace BecomeAChef.MVVM.ViewModel
 
 
 
-        public AddReceipeViewModel()
+        private IChangeView changeView;
+        public AddReceipeViewModel(IChangeView changeView)
         {
             InitCommands();
+
+            this.changeView = changeView;
         }
 
         private void InitCommands()
@@ -132,6 +135,7 @@ namespace BecomeAChef.MVVM.ViewModel
             }
 
             MessageBox.Show("Рецепт успешно добавлен", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            changeView.ChangeView(ViewNames.ProfileView);
         }
 
         private bool Validaiton()
