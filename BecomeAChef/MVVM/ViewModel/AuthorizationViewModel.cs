@@ -47,27 +47,49 @@ namespace BecomeAChef.MVVM.ViewModel
         {
             AuthCommand = new RelayCommand(o =>
             {
-                using (RecipeBookDBEntities db = new RecipeBookDBEntities())
-                {
-                    var user = db.User.Where(u => (u.PhoneNumber == PhoneOrEmail || u.Email == PhoneOrEmail) && u.Password == Password).FirstOrDefault();
-                    UserDataSaver.UserID = user.ID;
+                if (!Validation()) { return; }
 
-                    if (user != null)
-                    {
-                        changeView.ChangeView(ViewNames.ProfileView);
-                    } else
-                    {
-                        MessageBox.Show("Такого пользователя не существует", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        Password = "";
-                        PhoneOrEmail = "";
-                    }
-                }
+                changeView.ChangeView(ViewNames.ProfileView);
             });
 
             RegistrationCommand = new RelayCommand(o => 
             {
                 changeView.ChangeView(ViewNames.RegistrationView);
             });
+        }
+
+        private bool Validation()
+        {
+            if (string.IsNullOrWhiteSpace(PhoneOrEmail))
+            {
+                MessageBox.Show("Заполните телефон или email", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(Password))
+            {
+                MessageBox.Show("Заполните пароль", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else
+            {
+                using (RecipeBookDBEntities db = new RecipeBookDBEntities())
+                {
+                    var user = db.User.Where(u => (u.PhoneNumber == PhoneOrEmail || u.Email == PhoneOrEmail) && u.Password == Password).FirstOrDefault();
+
+                    if (user != null)
+                    {
+                        UserDataSaver.UserID = user.ID;
+                        return true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Такого пользователя не существует", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        Password = "";
+                        PhoneOrEmail = "";
+                        return false;
+                    }
+                }
+            }
         }
     }
 }
