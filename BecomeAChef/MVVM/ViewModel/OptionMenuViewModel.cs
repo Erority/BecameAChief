@@ -1,4 +1,5 @@
 ﻿using BecomeAChef.Core;
+using BecomeAChef.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -249,7 +250,16 @@ namespace BecomeAChef.MVVM.ViewModel
 
             InitCommands();
 
-            AuthorizationVMCommand.Execute(null);
+            if (UserDataSaver.LastView == null)
+                AuthorizationVMCommand.Execute(null);
+            else
+            {
+                GridVM = new GridViewModel();
+                FavouritesVM = new FavouritesViewModel();
+                ProfileVM = new ProfileViewModel();
+                AddReceipeVM = new AddReceipeViewModel();
+                GridVMCommand.Execute(null);
+            }
         }
 
         private void InitCommands()

@@ -32,7 +32,7 @@ namespace BecomeAChef.MVVM.ViewModel
             set 
             {
                 selectedItem = value;
-                MessageBox.Show(((Recipe)value).Title);
+                UserDataSaver.LastView = "GridView";
                 Coordinator.MainVM.Recipe = (Recipe)selectedItem;
             }
         }

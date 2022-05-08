@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BecomeAChef.EF;
+using BecomeAChef.MVVM;
 
 namespace BecomeAChef.Utils
 {
@@ -16,6 +17,8 @@ namespace BecomeAChef.Utils
             get { return userID; }
             set { userID = value; }
         }
+
+        public static string LastView { get; set; } = null;
 
     }
 }
