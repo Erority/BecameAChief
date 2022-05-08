@@ -112,7 +112,7 @@ namespace BecomeAChef.MVVM.ViewModel
             }
         }
         
-        private string searchText= "поиск";
+        private string searchText = "поиск";
         public string SearchText
         {
             get
@@ -122,15 +122,28 @@ namespace BecomeAChef.MVVM.ViewModel
 
             set
             {
-                if (searchText == "поиск")
-                {
-                    searchText = "";
-                }
-
                 searchText = value;
                 OnPropertyChanged();
             }
         }
+
+        private bool focusTextBlock;
+
+        public bool FocusTextBlock
+        {
+            get { return focusTextBlock; }
+            set 
+            {
+                if (value == true && SearchText == "поиск")
+                    SearchText = "";
+                else if(value == false && SearchText == "")
+                    SearchText = "поиск";
+
+                focusTextBlock = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #region Visibility
         private Visibility editButtonVisibility;
@@ -388,5 +401,6 @@ namespace BecomeAChef.MVVM.ViewModel
                     break;
             }
         }
+
     }
 }

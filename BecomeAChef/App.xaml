@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:BecomeAChef"
              xmlns:viewModel="clr-namespace:BecomeAChef.MVVM.ViewModel"
              xmlns:view="clr-namespace:BecomeAChef.MVVM.View"
+             xmlns:utils="clr-namespace:BecomeAChef.Utils"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

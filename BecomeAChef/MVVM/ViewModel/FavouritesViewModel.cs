@@ -67,7 +67,7 @@ namespace BecomeAChef.MVVM.ViewModel
 
         public bool FilterCollection (string searchStr)
         {
-            UserFavoritesReceips = UserFavoritesReceips.Where(r => r.Title.ToLower() == searchStr.ToLower()).ToList();
+            UserFavoritesReceips = UserFavoritesReceips.Where(r => r.Title.ToLower().Contains(searchStr.ToLower())).ToList();
 
             using (RecipeBookDBEntities db = new RecipeBookDBEntities())
             {

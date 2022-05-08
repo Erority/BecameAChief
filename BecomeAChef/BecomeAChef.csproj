@@ -82,6 +82,7 @@
       <DependentUpon>RegistrationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Coordinator.cs" />
+    <Compile Include="Utils\FocusExtension.cs" />
     <Compile Include="Utils\ImageConverter.cs" />
     <Compile Include="Utils\UserDataSaver.cs" />
     <Page Include="MainWindow.xaml">
