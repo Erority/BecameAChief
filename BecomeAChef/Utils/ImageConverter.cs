@@ -40,8 +40,16 @@ namespace BecomeAChef.Utils
         {
             MemoryStream memStream = new MemoryStream();
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(imageC));
-            encoder.Save(memStream);
+
+            try
+            {
+                encoder.Frames.Add(BitmapFrame.Create(imageC));
+                encoder.Save(memStream);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
             return memStream.ToArray();
         }
 

@@ -83,8 +83,11 @@ namespace BecomeAChef.MVVM.ViewModel
         {
             ChangeUserImageCommand = new RelayCommand(o =>
             {
-                UserImage = new ImageConverter().GetImageFromFileDialog();
-                UpdateUserImageInDB(new ImageConverter().GetJPGFromImageControl(UserImage));
+                var image = new ImageConverter().GetImageFromFileDialog();
+                 
+                if (image.UriSource == null) { return; }
+
+                UserImage = image;
             });
         }
 
@@ -98,30 +101,9 @@ namespace BecomeAChef.MVVM.ViewModel
                 currentUser.Nickname = UserData.Nickname;
                 currentUser.PhoneNumber = UserData.PhoneNumber;
                 currentUser.Email = UserData.Email;
+                currentUser.ProfilePicture = new ImageConverter().GetJPGFromImageControl(UserImage);
 
 
-                try
-                {
-                    db.Entry(currentUser).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-
-            MessageBox.Show("Данные изменены успешно");
-        }
-
-
-        private void UpdateUserImageInDB(byte[] imageCodeArray)
-        {
-            using (RecipeBookDBEntities db = new RecipeBookDBEntities())
-            {
-                var currentUser = db.User.Where(u => u.ID == UserDataSaver.UserID).FirstOrDefault();
-
-                currentUser.ProfilePicture = imageCodeArray;
                 try
                 {
                     db.Entry(currentUser).State = EntityState.Modified;

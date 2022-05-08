@@ -95,7 +95,11 @@ namespace BecomeAChef.MVVM.ViewModel
         {
             ChangeImageCommand = new RelayCommand(o =>
             {
-                Image = new ImageConverter().GetImageFromFileDialog();
+                var image = new ImageConverter().GetImageFromFileDialog();
+
+                if (image.UriSource == null) { return; }
+
+                Image = image;
             });
         }
 
