@@ -41,7 +41,7 @@
                 />
 
 
-                <Button Content="редактировать"
+                <Button Content="Сохранить изменения"
                         Margin="10 13 10 4"
                         Grid.Column="0"
                         Grid.Row="1"

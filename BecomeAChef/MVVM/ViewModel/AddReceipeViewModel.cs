@@ -101,6 +101,8 @@ namespace BecomeAChef.MVVM.ViewModel
 
         public void AddRecipe()
         {
+            if (!Validaiton()) { return; }
+
             Recipe recipe = new Recipe()
             {
                 UserID = (UserDataSaver.UserID),
@@ -126,6 +128,38 @@ namespace BecomeAChef.MVVM.ViewModel
             }
 
             MessageBox.Show("Рецепт успешно добавлен", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private bool Validaiton()
+        {
+            if (string.IsNullOrWhiteSpace(Title))
+            {
+                MessageBox.Show("Введите название рецепта", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(Content))
+            {
+                MessageBox.Show("Введите описание рецепта", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (image == null)
+            {
+                MessageBox.Show("Загрузите фото", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (CookingTime <= 0)
+            {
+                MessageBox.Show("Время готовки не может меньше или равно нулю", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (Portions <= 0)
+            {
+                MessageBox.Show("Кол-во порций не может меньше или равно нулю", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+
+            return true;
         }
 
     }
