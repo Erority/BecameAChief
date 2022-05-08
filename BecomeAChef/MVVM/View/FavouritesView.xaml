@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="25 0 83 0">
-        <ListView  Background="Transparent" BorderThickness="0" ItemsSource="{Binding UserFavoritesReceips}">
+        <ListView  Background="Transparent" BorderThickness="0" ItemsSource="{Binding UserFavoritesReceips}" SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="1"

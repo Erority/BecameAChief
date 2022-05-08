@@ -24,8 +24,17 @@ namespace BecomeAChef.MVVM.ViewModel
             }
         }
 
-        private RecipeBookDBEntities db = new RecipeBookDBEntities();
-
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                selectedItem = value;
+                UserDataSaver.LastView = "FavouritesView";
+                Coordinator.MainVM.Recipe = (Recipe)selectedItem;
+            }
+        }
 
         public FavouritesViewModel()
         {

@@ -258,7 +258,10 @@ namespace BecomeAChef.MVVM.ViewModel
                 FavouritesVM = new FavouritesViewModel();
                 ProfileVM = new ProfileViewModel();
                 AddReceipeVM = new AddReceipeViewModel();
-                GridVMCommand.Execute(null);
+
+                if (UserDataSaver.LastView == "GridView")
+                    GridVMCommand.Execute(null);
+                else FavouritesVMCommand.Execute(null);
             }
         }
 
