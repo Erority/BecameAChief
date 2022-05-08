@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -100,6 +101,11 @@ namespace BecomeAChef.MVVM.ViewModel
         {
             RegCommand = new RelayCommand(o =>
             {
+                if (!Validaiton())
+                {
+                    return;
+                }
+
                 using (RecipeBookDBEntities db = new RecipeBookDBEntities())
                 {
                     try
@@ -135,5 +141,55 @@ namespace BecomeAChef.MVVM.ViewModel
                 UserImage = new ImageConverter().GetImageFromFileDialog();
             });
         }
+
+        private const string emailRegex = @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
+        private const string phoneRegex = @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$";
+
+        private bool Validaiton()
+        {
+            Regex emRegex = new Regex(emailRegex);
+            Regex phRegex = new Regex(phoneRegex);
+
+
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                MessageBox.Show("Введите имя", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(Password))
+            {
+                MessageBox.Show("Введите пароль", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(Email))
+            {
+                MessageBox.Show("Введите почту", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                MessageBox.Show("Введите телефон", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (userImage == null)
+            {
+                MessageBox.Show("Загрузите фото", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (!emRegex.IsMatch(Email))
+            {
+                MessageBox.Show("Почта должна быть формата test@text.domen", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            else if (!phRegex.IsMatch(PhoneNumber))
+            {
+                MessageBox.Show("Телефон должен быть формата (000)000-00-00", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+
+            return true;
+        }
+
     }
 }
