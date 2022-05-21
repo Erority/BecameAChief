@@ -178,3 +178,11 @@ C:\Users\progr\Desktop\BecameAChief\BecomeAChef\obj\Debug\BecomeAChef.csproj.Cor
 C:\Users\progr\Desktop\BecameAChief\BecomeAChef\obj\Debug\BecomeAChef.csproj.CopyComplete
 C:\Users\progr\Desktop\BecameAChief\BecomeAChef\obj\Debug\BecomeAChef.exe
 C:\Users\progr\Desktop\BecameAChief\BecomeAChef\obj\Debug\BecomeAChef.pdb
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\AddReceipeView.g.cs
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\AuthorizationView.g.cs
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\RecipeView.g.cs
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\RegistrationView.g.cs
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\AddReceipeView.baml
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\AuthorizationView.baml
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\RecipeView.baml
+C:\Denis\BecameAChief\BecomeAChef\obj\Debug\MVVM\View\RegistrationView.baml

@@ -40,6 +40,14 @@
                     Style="{StaticResource ButtonMainTheme}"/>
 
 
+
+        <Button Grid.Column="3"
+                    Content="Удалить"
+                    Margin="10 70"
+                    Command="{Binding DeleteCommand}"
+                    Style="{StaticResource ButtonMainTheme}"/>
+
+
         <Button Grid.Column="2"
                     Content="Назад"
                     Margin="10 70"

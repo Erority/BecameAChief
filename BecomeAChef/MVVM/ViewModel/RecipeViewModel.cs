@@ -17,6 +17,8 @@ namespace BecomeAChef.MVVM.ViewModel
     {
         public RelayCommand GoBackCommand { get; set; }
 
+        public RelayCommand DeleteCommand { get; set; }
+
         private bool isInit = true;
 
         private Recipe currentRecipe;
@@ -75,6 +77,31 @@ namespace BecomeAChef.MVVM.ViewModel
             GoBackCommand = new RelayCommand(o => 
             {
                 Coordinator.MainVM.GoBack();
+            });
+
+            DeleteCommand = new RelayCommand(o =>
+            {
+
+                var resultMess = MessageBox.Show("Вы действительно хотите удалить рецепт ?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (resultMess == MessageBoxResult.Yes)
+                {
+
+                    using (RecipeBookDBEntities db = new RecipeBookDBEntities())
+                    {
+                        var currentRecipe = db.Recipe.Where(r => r.ID == CurrentRecipe.ID).FirstOrDefault();
+
+                        db.Recipe.Remove(currentRecipe);
+
+                        try
+                        {
+                            db.SaveChanges();
+                        } catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+
+                        Coordinator.MainVM.GoBack();
+                    }
+                } else { return; }
+
             });
         }
 
